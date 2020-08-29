@@ -1,4 +1,5 @@
-name: Deploying React App
+  
+name: Deploying React App 
 
 on:
   push:
@@ -12,22 +13,21 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-        
+    
     - name: Install NodeJS
       uses: actions/setup-node@v2-beta
       with:
-        node_version: 12
-        
-    - name: Yarn Installation
-      uses: borales/actions-yarn@v2.0.0
+        node-version: 12
+    
+    - uses: borales/actions-yarn@v2.0.0
       with:
-        cmd: install
+        cmd: install # will run `yarn install` command
         
-    - name: Building react app
-      run: yarn build 
+    - name: Building React App
+      run: yarn build
       
     - name: Install Surge
       run: npm install --global surge
-      
-    - name: Deploying site to surge
-      run: surge ./build react-app-practice.surge.sh --token ${{ secrets.SURGE_TOKEN }}
+
+    - name: Deploy to Surge
+      run: surge ./build basic-react-app-class2.surge.sh --token ${{ secrets.SURGE_TOKEN }}
